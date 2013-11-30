@@ -8,7 +8,11 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 	
 	boolean xpto = false;
-	String txt;
+	String txt = "Ola Mundo";
+	int color = 0xff007D00; 
+	String old_txt;
+	int old_color;
+	TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,24 +32,34 @@ public class MainActivity extends Activity {
     //OnClick method
     public void kumeKie(View view){
     	
-    	TextView tv = (TextView)findViewById(R.id.my_label_id);
+    	tv = (TextView)findViewById(R.id.my_label_id);
+    	
+    	old_txt = (String)tv.getText();
+    	old_color = tv.getCurrentTextColor();
     	
     	
-    	if (xpto) {
-    		
-            tv.setText(txt);
-            ((TextView)view).setText("clica");
-    		xpto=false;
-    	}else{
-    		
-    		txt = (String) tv.getText();
-    		tv.setText("KUME KIE");
-            ((TextView)view).setText("click");
-    		xpto=true;
-    		
-    	}
+    	tv.setText(txt);
+    	tv.setTextColor(color);
+//    	tv.setTextColor(_color);
+//    	_color = old_color;
+    	txt = old_txt;
     	
-    }
+    	
+//    	if (xpto) {
+//    		
+//            tv.setText(txt);
+//            ((TextView)view).setText("clica");
+//    		xpto=false;
+//    	}else{
+//    		
+//    		txt = (String) tv.getText();
+//    		tv.setText("KUME KIE");
+//            ((TextView)view).setText("click");
+//    		xpto=true;
+//    		
+//    	}
+    	
+   }
     
    
     

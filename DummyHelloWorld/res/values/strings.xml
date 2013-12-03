@@ -10,5 +10,6 @@
     <string name="btn_mail">Envia Mail</string>
     <string name="btn_mudaActivity">Muda ecra</string>
     <string name="ecra2">Ecra 2</string>
+    <string name="bt_ecra1">Volta Inicio</string>
 
 </resources>

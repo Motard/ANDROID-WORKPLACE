@@ -9,5 +9,10 @@
         android:layout_height="wrap_content"
         android:text="@string/ecra2"
         android:textColor="#FF0000" />
+<Button
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:text="@string/bt_ecra1"
+    	android:onClick="voltaInicio"/>
 
 </LinearLayout>

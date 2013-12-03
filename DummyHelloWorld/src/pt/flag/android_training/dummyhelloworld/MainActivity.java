@@ -28,10 +28,24 @@ public class MainActivity extends Activity {
         
         //TextView tv1 = (TextView)findViewById(R.id.myId1);
         //tv1.setText(tv.getText());
+       
         
        
     }
     
+    protected void onSaveInstanceState(Bundle outState)
+    {
+    	
+    	super.onSaveInstanceState(outState);
+    	
+    	outState.putString(txt, old_txt);
+    }
+    
+    protected void onRestoreInstanceState(Bundle returnState)
+    {
+    	super.onRestoreInstanceState(returnState);
+    	String myString = returnState.getString("txt");
+    }
     
     //OnClick method
     public void kumeKie(View view){

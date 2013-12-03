@@ -6,5 +6,9 @@
     <string name="hello_world">Hello World</string>
     <string name="paulo">Paulo</string>
     <string name="btn_text">Click</string>
+    <string name="btn_toast">Toast</string>
+    <string name="btn_mail">Envia Mail</string>
+    <string name="btn_mudaActivity">Muda ecra</string>
+    <string name="ecra2">Ecra 2</string>
 
 </resources>

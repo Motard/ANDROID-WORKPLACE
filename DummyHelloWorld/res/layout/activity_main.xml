@@ -24,11 +24,40 @@
         android:text="@string/paulo" />
 
     <Button
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/myId1"
         android:layout_below="@+id/myId1"
-        android:text="@string/btn_text"
-        android:onClick="kumeKie" />
+        android:onClick="kumeKie"
+        android:text="@string/btn_text" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_toRightOf="@+id/my_label_id"
+        android:onClick="showToast"
+        android:text="@string/btn_toast" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button2"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_toRightOf="@+id/button2"
+        android:onClick="enviaMail"
+        android:text="@string/btn_mail" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="34dp"
+        android:text="@string/btn_mudaActivity"
+        android:onClick="mudaEcra" />
 
 </RelativeLayout>

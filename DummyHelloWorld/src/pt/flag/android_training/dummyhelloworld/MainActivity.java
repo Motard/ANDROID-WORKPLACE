@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+    
         //TextView tv = (TextView)findViewById(R.id.my_label_id);
         //tv.setText("KUME KIE");
         
@@ -33,19 +34,24 @@ public class MainActivity extends Activity {
        
     }
     
-    protected void onSaveInstanceState(Bundle outState)
+    protected void onSaveInstanceState(Bundle savedInstanceState)
     {
     	
-    	super.onSaveInstanceState(outState);
+    	super.onSaveInstanceState(savedInstanceState);
+    	tv = (TextView)findViewById(R.id.my_label_id);
+    	savedInstanceState.putString("saveText",tv.getText().toString());
     	
-    	outState.putString(txt, old_txt);
     }
     
-    protected void onRestoreInstanceState(Bundle returnState)
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
     {
-    	super.onRestoreInstanceState(returnState);
-    	String myString = returnState.getString("txt");
+    	super.onRestoreInstanceState(savedInstanceState);
+    	tv = (TextView)findViewById(R.id.my_label_id);
+    	tv.setText(savedInstanceState.getString("saveText"));
     }
+    
+   
+    
     
     //OnClick method
     public void kumeKie(View view){

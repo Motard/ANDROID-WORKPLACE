@@ -52,12 +52,33 @@
         android:text="@string/btn_mail" />
 
     <Button
+        android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button1"
         android:layout_below="@+id/button1"
         android:layout_marginTop="34dp"
-        android:text="@string/btn_mudaActivity"
-        android:onClick="mudaEcra" />
+        android:onClick="mudaEcra"
+        android:text="@string/btn_mudaActivity" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button3"
+        android:layout_below="@+id/button3"
+        android:layout_marginTop="49dp"
+        android:onClick="mandaMailPara"
+        android:text="@string/btn_mudaActivity1" />
+
+    <EditText
+        android:id="@+id/cxTexto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_below="@+id/button4"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:hint="@string/my_edit_text_hint" />
 
 </RelativeLayout>

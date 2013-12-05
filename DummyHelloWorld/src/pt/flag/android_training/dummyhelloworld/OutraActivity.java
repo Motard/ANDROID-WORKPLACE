@@ -1,7 +1,6 @@
 package pt.flag.android_training.dummyhelloworld;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -14,11 +13,9 @@ public class OutraActivity extends Activity{
 	        
 	    }
 	 
-	 public void voltaInicio(View c)
+	 public void voltaInicio(View v)
 	 {
-		 Intent intencaoMudaEcra = new Intent(this,MainActivity.class);
-	    	
-	    startActivity(intencaoMudaEcra); 
+		 this.onBackPressed();
 		 
 	 }
 }

@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="pt.flag.android_training.dummyhelloworld.OutraActivity"/>
+        <activity android:name="pt.flag.android_training.dummyhelloworld.MailActivity"/>
     </application>
 
 </manifest>

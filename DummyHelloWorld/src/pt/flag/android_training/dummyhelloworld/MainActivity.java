@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,8 +51,7 @@ public class MainActivity extends Activity {
     	tv.setText(savedInstanceState.getString("saveText"));
     }
     
-   
-    
+      
     
     //OnClick method
     public void kumeKie(View view){
@@ -121,10 +121,30 @@ public class MainActivity extends Activity {
     
     public void mudaEcra(View v)
     {
+    	Toast.makeText(this, "Bazar", Toast.LENGTH_SHORT).show();
     	Intent intencaoMudaEcra = new Intent(this,OutraActivity.class);
     	
     	startActivity(intencaoMudaEcra);
     	
+    }
+    
+    public void mandaMailPara(View v)
+    {
+    	
+    	//  	first create an intent to open the list activity ith the email adresses
+    	Intent intencaoMudaEcra = new Intent(this,MailActivity.class);
+
+    	//    	set intent extra with the e-mail body string
+    	//		step1: get the email body from EditText
+    	EditText et = (EditText)findViewById(R.id.cxTexto);
+    	String body = et.getText().toString();
+    	
+    	// 		step2: set as extras
+    	
+    	intencaoMudaEcra.putExtra("my_body", body);
+    	
+    	//		Send the intent :-(    	
+    	startActivity(intencaoMudaEcra);
     }
     
 }

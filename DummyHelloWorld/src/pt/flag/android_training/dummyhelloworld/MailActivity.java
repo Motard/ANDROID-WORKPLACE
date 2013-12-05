@@ -20,7 +20,7 @@ public class MailActivity  extends ListActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
+		setContentView(R.layout.mail_layout);
 		/*
 		 * In this example no layout is defined
 		 * So is not necessary to inflate the view
@@ -42,7 +42,11 @@ public class MailActivity  extends ListActivity{
 		//Create an adapter object to adapt the data mdel to this ListView
 		//Usage of a default adapter
 		
-		ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,emails);
+//		ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,emails);
+		
+		
+//		Usar o meu layout do tipo ListView
+		ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.mail_layout, emails);
 		
 		//Set adapter to the list
 		setListAdapter(adapter);

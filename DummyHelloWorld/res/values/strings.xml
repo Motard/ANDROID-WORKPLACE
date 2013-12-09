@@ -13,5 +13,6 @@
     <string name="bt_ecra1">Volta Inicio</string>
     <string name="btn_mudaActivity1">Ecra mails</string>
     <string name="my_edit_text_hint">Escreva texto mail aqui</string>
+    <string name="btn_del">DEL</string>
 
 </resources>

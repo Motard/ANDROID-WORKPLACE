@@ -12,15 +12,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MailActivity  extends ListActivity{
-
+	ListView listView;
+	ArrayList<String> emails = new ArrayList<String>();
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.mail_layout);
+		
+
 		/*
 		 * In this example no layout is defined
 		 * So is not necessary to inflate the view
@@ -34,7 +40,6 @@ public class MailActivity  extends ListActivity{
 										"drmotard@hotmail.com"};*/
 		
 		//TODO: do i need reference to e-mail list?!
-		ArrayList<String> emails = new ArrayList<String>();
 		emails.add("pabm71@gmail.com");
 		emails.add("pmotard@sapo.pt");
 		emails.add("drmotard@hotmail.com");
@@ -46,11 +51,25 @@ public class MailActivity  extends ListActivity{
 		
 		
 //		Usar o meu layout do tipo ListView
-		ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.mail_layout, emails);
+//		este adapter funciona
+//		ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, emails);
+	
+//		este vai ser o meu adapter
+//		com o layout simples
+//		ListAdapter adapter = new ArrayAdapter<String>(this, R.layout.mail_layout,emails);
+	
+//		este é o layout alternativo com texto e butão
+		ListAdapter adapter = new ArrayAdapter<String>(this, R.layout.mail_layout_2, R.id.my_text_view, emails);
 		
+
 		//Set adapter to the list
 		setListAdapter(adapter);
 		
+		
+//		TODO explorar esta parte
+//		http://developer.android.com/guide/topics/ui/declaring-layout.html#AdapterViews
+//		ListView listView = (ListView) findViewById(R.id.listview);
+//		listView.setAdapter(adapter);
 		
 	}
 	
@@ -59,9 +78,11 @@ public class MailActivity  extends ListActivity{
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
 		
+		
 		//get the email string
 		//TODO what if the item is not a TextView?!
 		String email = ((TextView)v).getText().toString();
+
 		
 		//get the email-body
 		//TODO name of the extra is hard coded 
@@ -78,4 +99,6 @@ public class MailActivity  extends ListActivity{
 		startActivity(Intent.createChooser(intencaoMail, "Escolha app."));
 		
 	}
+	
+	
 }

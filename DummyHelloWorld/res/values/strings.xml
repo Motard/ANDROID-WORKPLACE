@@ -14,5 +14,8 @@
     <string name="btn_mudaActivity1">Ecra mails</string>
     <string name="my_edit_text_hint">Escreva texto mail aqui</string>
     <string name="btn_del">DEL</string>
+    <string name="my_user_signature_summary">Write your signature.</string>
+    <string name="my_user_signature_title">Digital Signature</string>
+    <string name="my_button_open_prefs">Preferences</string>
 
 </resources>

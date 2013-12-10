@@ -24,6 +24,7 @@
         </activity>
         <activity android:name="pt.flag.android_training.dummyhelloworld.OutraActivity"/>
         <activity android:name="pt.flag.android_training.dummyhelloworld.MailActivity"/>
+        <activity android:name="pt.flag.android_training.dummyhelloworld.PrefsActivity"/>
     </application>
 
 </manifest>

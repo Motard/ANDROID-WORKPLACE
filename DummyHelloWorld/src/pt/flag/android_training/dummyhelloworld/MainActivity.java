@@ -32,7 +32,15 @@ public class MainActivity extends Activity {
         //tv1.setText(tv.getText());
        
         
-       
+       findViewById(R.id.my_button_open_prefs).setOnClickListener(new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			startActivity(new Intent(MainActivity.this,PrefsActivity.class));
+			
+		}
+	});
     }
     
     protected void onSaveInstanceState(Bundle savedInstanceState)

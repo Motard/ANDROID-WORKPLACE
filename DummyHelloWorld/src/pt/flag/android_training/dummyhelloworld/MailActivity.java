@@ -4,19 +4,23 @@ import java.util.ArrayList;
 
 import org.apache.http.protocol.HTTP;
 
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MailActivity  extends ListActivity{
-	ListView listView;
-	ArrayList<String> emails = new ArrayList<String>();
+@SuppressLint("NewApi") public class MailActivity  extends ListActivity{
+	
+	private ArrayList<String> emails = new ArrayList<String>();
 	
 	
 	@Override
@@ -59,9 +63,11 @@ public class MailActivity  extends ListActivity{
 //		ListAdapter adapter = new ArrayAdapter<String>(this, R.layout.mail_layout,emails);
 	
 //		este é o layout alternativo com texto e butão
-		ListAdapter adapter = new ArrayAdapter<String>(this, R.layout.mail_layout_2, R.id.my_text_view, emails);
+//		ListAdapter adapter = new ArrayAdapter<String>(this, R.layout.mail_layout_2, R.id.my_text_view, emails);
 		
-
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.mail_layout_2);
+		ArrayAdapter<String> adapter = new ContactsAdapter();
+		
 		//Set adapter to the list
 		setListAdapter(adapter);
 		
@@ -81,13 +87,15 @@ public class MailActivity  extends ListActivity{
 		
 		//get the email string
 		//TODO what if the item is not a TextView?!
-		String email = ((TextView)v).getText().toString();
-
+//		String email = ((TextView)v).getText().toString();
+		String email = emails.get(position);
 		
 		//get the email-body
 		//TODO name of the extra is hard coded 
 		String body = getIntent().getStringExtra("my_body");
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		
+		body += prefs.getString("signature", "");
 		
 		//create implicit intent to send the email
 		Intent intencaoMail = new Intent(Intent.ACTION_SEND);
@@ -100,5 +108,50 @@ public class MailActivity  extends ListActivity{
 		
 	}
 	
+	private class ContactsAdapter extends ArrayAdapter<String>
+	{
+		public ContactsAdapter()
+		{
+//			the context is the cirrent activity(MailActivity instance)
+			super(MailActivity.this,0,emails);
+		}
+		
+		@Override
+		public View getView(final int position, View convertView, ViewGroup parent) {
+			
+//			final int pos = position;
+			
+			// TODO Auto-generated method stub
+			convertView = getLayoutInflater().inflate(R.layout.mail_layout_2, null);
+			
+//			set the email in the row
+			((TextView)convertView.findViewById(R.id.my_mail_view)).setText(emails.get(position));
+			
+//			Set onClick event for delete the email from the list
+			convertView.findViewById(R.id.bt_del_mail).setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// Delete the email on that position
+//					emails.remove(pos);
+					emails.remove(position);
+					ContactsAdapter.this.notifyDataSetChanged();
+				}
+			});
+			return convertView;
+		}
+		
+		@Override
+		public boolean areAllItemsEnabled() {
+			// TODO Auto-generated method stub
+			return super.areAllItemsEnabled();
+		}
+		
+		@Override
+		public boolean isEnabled(int position) {
+			// TODO Auto-generated method stub
+			return super.isEnabled(position);
+		}
+	}
 	
 }

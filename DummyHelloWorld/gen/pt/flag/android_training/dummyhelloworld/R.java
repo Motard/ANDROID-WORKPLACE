@@ -24,17 +24,21 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000a;
-        public static final int bt_del_mail=0x7f090009;
+        public static final int action_settings=0x7f09000e;
+        public static final int bt_del_mail=0x7f09000b;
         public static final int button1=0x7f090002;
         public static final int button2=0x7f090003;
-        public static final int button3=0x7f090004;
-        public static final int button4=0x7f090005;
-        public static final int cxTexto=0x7f090006;
+        public static final int button3=0x7f090005;
+        public static final int button4=0x7f090006;
+        public static final int button5=0x7f090004;
+        public static final int cxTexto=0x7f090007;
         public static final int myId1=0x7f090001;
-        public static final int my_button_open_prefs=0x7f090007;
+        public static final int my_add_contact_menu_id=0x7f09000c;
+        public static final int my_button_open_prefs=0x7f090008;
+        public static final int my_button_start_alarm_id=0x7f090009;
         public static final int my_label_id=0x7f090000;
-        public static final int my_mail_view=0x7f090008;
+        public static final int my_mail_view=0x7f09000a;
+        public static final int my_open_prefs_id=0x7f09000d;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -43,7 +47,8 @@ public final class R {
         public static final int mail_layout_2=0x7f030003;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
+        public static final int contacts=0x7f080000;
+        public static final int main=0x7f080001;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
@@ -57,8 +62,11 @@ public final class R {
         public static final int btn_toast=0x7f060005;
         public static final int ecra2=0x7f060008;
         public static final int hello_world=0x7f060002;
+        public static final int my_add_contac_menu=0x7f060010;
         public static final int my_button_open_prefs=0x7f06000f;
+        public static final int my_button_start_alarm=0x7f060012;
         public static final int my_edit_text_hint=0x7f06000b;
+        public static final int my_open_prefs_id=0x7f060011;
         public static final int my_user_signature_summary=0x7f06000d;
         public static final int my_user_signature_title=0x7f06000e;
         public static final int paulo=0x7f060003;

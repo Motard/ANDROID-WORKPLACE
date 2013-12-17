@@ -3,7 +3,10 @@ package pt.flag.android_training.dummyhelloworld;
 import org.apache.http.protocol.HTTP;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
@@ -38,6 +41,21 @@ public class MainActivity extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			startActivity(new Intent(MainActivity.this,PrefsActivity.class));
+			
+		}
+	});
+       
+//       start alarm button
+       findViewById(R.id.my_button_start_alarm_id).setOnClickListener(new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// get alarm
+			AlarmManager manager = (AlarmManager)MainActivity.this.getSystemService(ALARM_SERVICE);
+			PendingIntent intent = PendingIntent.getActivity(MainActivity.this, 
+															0, new Intent(MainActivity.this, OutraActivity.class),
+															PendingIntent.FLAG_ONE_SHOT);
+			manager.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime()+5000, intent);
 			
 		}
 	});

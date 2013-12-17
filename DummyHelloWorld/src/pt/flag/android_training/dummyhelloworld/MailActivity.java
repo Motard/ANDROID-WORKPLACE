@@ -5,23 +5,27 @@ import java.util.ArrayList;
 import org.apache.http.protocol.HTTP;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 @SuppressLint("NewApi") public class MailActivity  extends ListActivity{
 	
 	private ArrayList<String> emails = new ArrayList<String>();
-	
+	private ArrayAdapter<String> adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,7 @@ import android.widget.Toast;
 										"pmotard@sapo.pt",
 										"drmotard@hotmail.com"};*/
 		
-		//TODO: do i need reference to e-mail list?!
+	
 		emails.add("pabm71@gmail.com");
 		emails.add("pmotard@sapo.pt");
 		emails.add("drmotard@hotmail.com");
@@ -66,7 +70,7 @@ import android.widget.Toast;
 //		ListAdapter adapter = new ArrayAdapter<String>(this, R.layout.mail_layout_2, R.id.my_text_view, emails);
 		
 //		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.mail_layout_2);
-		ArrayAdapter<String> adapter = new ContactsAdapter();
+		adapter = new ContactsAdapter();
 		
 		//Set adapter to the list
 		setListAdapter(adapter);
@@ -154,4 +158,45 @@ import android.widget.Toast;
 		}
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		boolean resSuper=super.onCreateOptionsMenu(menu);
+		getMenuInflater().inflate(R.menu.contacts, menu);
+		return resSuper && true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+//		add new contact
+		switch (item.getItemId()) {
+		case R.id.my_add_contact_menu_id:
+			final EditText editText = new EditText(this);
+//			Create a Dialog
+			new AlertDialog.Builder(this).setTitle("new e-mail")
+										 .setNegativeButton("cancel", null)
+										 .setPositiveButton("add", new OnClickListener() {
+											
+											@Override
+											public void onClick(DialogInterface dialog, int which) {
+												adapter.add(editText.getText().toString());
+												
+											}
+										})
+										.setView(editText)// Returns a Builder
+										.create() //Returns an AlertDialog
+										.show();
+			return true;
+			
+//			open preferences activity
+		case R.id.my_open_prefs_id:
+			startActivity(new Intent(this, PrefsActivity.class));
+			return true;
+			
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+		
+	}
 }

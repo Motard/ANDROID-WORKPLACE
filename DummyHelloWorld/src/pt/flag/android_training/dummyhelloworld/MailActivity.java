@@ -6,6 +6,7 @@ import org.apache.http.protocol.HTTP;
 
 import pt.flag.android_training.dummyhelloworld.providers.EmailsContract;
 import pt.flag.android_training.dummyhelloworld.services.AddEmailService;
+import pt.flag.android_training.dummyhelloworld.services.RemoveEmailService;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -174,10 +175,22 @@ import android.widget.TextView;
 		}
 
 		@Override
-		public void bindView(View v, Context ctx, Cursor cursor) {
+		public void bindView(View v, Context ctx, final Cursor cursor) {
 //			set text email
 			((TextView)v.findViewById(R.id.my_mail_view)).setText(cursor.getString(cursor.getColumnIndex(EmailsContract.EMAIL)));
 //			TODO set the event to DEL button
+			final int id = cursor.getInt(cursor.getColumnIndex(EmailsContract._ID));
+			v.findViewById(R.id.bt_del_mail).setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(MailActivity.this,RemoveEmailService.class);
+					
+					
+					intent.putExtra("POS", id);
+					startService(intent);
+				}
+			});
 		}
 
 		@Override

@@ -4,15 +4,22 @@ import java.util.ArrayList;
 
 import org.apache.http.protocol.HTTP;
 
+import pt.flag.android_training.dummyhelloworld.providers.EmailsContract;
+import pt.flag.android_training.dummyhelloworld.services.AddEmailService;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.CursorAdapter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,8 +31,9 @@ import android.widget.TextView;
 
 @SuppressLint("NewApi") public class MailActivity  extends ListActivity{
 	
-	private ArrayList<String> emails = new ArrayList<String>();
-	private ArrayAdapter<String> adapter;
+//	private ArrayList<String> emails = new ArrayList<String>();
+//	private ArrayAdapter<String> adapter;
+	private CursorAdapter adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +56,9 @@ import android.widget.TextView;
 										"drmotard@hotmail.com"};*/
 		
 	
-		emails.add("pabm71@gmail.com");
-		emails.add("pmotard@sapo.pt");
-		emails.add("drmotard@hotmail.com");
+		//OLD//emails.add("pabm71@gmail.com");
+		//OLD//emails.add("pmotard@sapo.pt");
+		//OLD//emails.add("drmotard@hotmail.com");
 		
 		//Create an adapter object to adapt the data mdel to this ListView
 		//Usage of a default adapter
@@ -70,16 +78,13 @@ import android.widget.TextView;
 //		ListAdapter adapter = new ArrayAdapter<String>(this, R.layout.mail_layout_2, R.id.my_text_view, emails);
 		
 //		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.mail_layout_2);
-		adapter = new ContactsAdapter();
+//		adapter = new ContactsAdapter();
 		
 		//Set adapter to the list
-		setListAdapter(adapter);
+//		setListAdapter(adapter);
 		
 		
-//		TODO explorar esta parte
-//		http://developer.android.com/guide/topics/ui/declaring-layout.html#AdapterViews
-//		ListView listView = (ListView) findViewById(R.id.listview);
-//		listView.setAdapter(adapter);
+		new FetchEmailsAsyncTask().execute();
 		
 	}
 	
@@ -92,7 +97,10 @@ import android.widget.TextView;
 		//get the email string
 		//TODO what if the item is not a TextView?!
 //		String email = ((TextView)v).getText().toString();
-		String email = emails.get(position);
+//		String email = emails.get(position);
+		
+		Cursor cursor = (Cursor)l.getItemAtPosition(position);
+		String email = cursor.getString(cursor.getColumnIndex(EmailsContract.EMAIL));
 		
 		//get the email-body
 		//TODO name of the extra is hard coded 
@@ -112,38 +120,46 @@ import android.widget.TextView;
 		
 	}
 	
-	private class ContactsAdapter extends ArrayAdapter<String>
+	private class ContactsAdapter extends CursorAdapter //extends ArrayAdapter<String>
 	{
-		public ContactsAdapter()
-		{
-//			the context is the cirrent activity(MailActivity instance)
-			super(MailActivity.this,0,emails);
-		}
 		
-		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
+		
+		
+		public ContactsAdapter( Cursor cursor) {
 			
-//			final int pos = position;
-			
-			// TODO Auto-generated method stub
-			convertView = getLayoutInflater().inflate(R.layout.mail_layout_2, null);
-			
-//			set the email in the row
-			((TextView)convertView.findViewById(R.id.my_mail_view)).setText(emails.get(position));
-			
-//			Set onClick event for delete the email from the list
-			convertView.findViewById(R.id.bt_del_mail).setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// Delete the email on that position
-//					emails.remove(pos);
-					emails.remove(position);
-					ContactsAdapter.this.notifyDataSetChanged();
-				}
-			});
-			return convertView;
+			super(MailActivity.this,cursor,CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 		}
+
+//		public ContactsAdapter()
+//		{
+////			the context is the cirrent activity(MailActivity instance)
+//			super(MailActivity.this,0,emails);
+//		}
+		
+//		@Override
+//		public View getView(final int position, View convertView, ViewGroup parent) {
+//			
+////			final int pos = position;
+//			
+//			// TODO Auto-generated method stub
+//			convertView = getLayoutInflater().inflate(R.layout.mail_layout_2, null);
+//			
+////			set the email in the row
+//			((TextView)convertView.findViewById(R.id.my_mail_view)).setText(emails.get(position));
+//			
+////			Set onClick event for delete the email from the list
+//			convertView.findViewById(R.id.bt_del_mail).setOnClickListener(new View.OnClickListener() {
+//				
+//				@Override
+//				public void onClick(View v) {
+//					// Delete the email on that position
+////					emails.remove(pos);
+//					emails.remove(position);
+//					ContactsAdapter.this.notifyDataSetChanged();
+//				}
+//			});
+//			return convertView;
+//		}
 		
 		@Override
 		public boolean areAllItemsEnabled() {
@@ -155,6 +171,25 @@ import android.widget.TextView;
 		public boolean isEnabled(int position) {
 			// TODO Auto-generated method stub
 			return super.isEnabled(position);
+		}
+
+		@Override
+		public void bindView(View v, Context ctx, Cursor cursor) {
+//			set text email
+			((TextView)v.findViewById(R.id.my_mail_view)).setText(cursor.getString(cursor.getColumnIndex(EmailsContract.EMAIL)));
+//			TODO set the event to DEL button
+		}
+
+		@Override
+		public View newView(Context arg0, Cursor arg1, ViewGroup arg2) {
+			return getLayoutInflater().inflate(R.layout.mail_layout_2, null);
+		}
+		
+		@Override
+		protected void onContentChanged() {
+			// TODO Auto-generated method stub
+			super.onContentChanged();
+			new FetchEmailsAsyncTask().execute();
 		}
 	}
 	
@@ -180,8 +215,10 @@ import android.widget.TextView;
 											
 											@Override
 											public void onClick(DialogInterface dialog, int which) {
-												adapter.add(editText.getText().toString());
-												
+//												adapter.add(editText.getText().toString());
+												Intent intent = new Intent(MailActivity.this, AddEmailService.class);
+												intent.putExtra("BATATE", editText.getText().toString());
+												startService(intent);
 											}
 										})
 										.setView(editText)// Returns a Builder
@@ -198,5 +235,40 @@ import android.widget.TextView;
 			return super.onOptionsItemSelected(item);
 		}
 		
+	}
+	
+	private class FetchEmailsAsyncTask extends AsyncTask<Void, Void, Cursor>
+	{
+
+//		Run in alternative Thread
+		@Override
+		protected Cursor doInBackground(Void... params) {
+			// TODO Make the query.Start managing cursor and return it.
+			Cursor cursor = getContentResolver().query(EmailsContract.CONTENT_URI, null, null, null, null);
+			
+			cursor.setNotificationUri(getContentResolver(), EmailsContract.CONTENT_URI);
+//			Tells that the MailActivity controls the life-cycle of the cursor
+			startManagingCursor(cursor);
+			return cursor;
+		}
+		
+		@Override
+		protected void onProgressUpdate(Void... values) {
+			// TODO Auto-generated method stub
+			super.onProgressUpdate(values);
+		}
+		
+		@Override
+		protected void onPostExecute(Cursor newCursor) {
+			
+			if(adapter == null)
+			{
+				adapter = new ContactsAdapter(newCursor);
+				MailActivity.this.setListAdapter(adapter);
+			}else{
+				stopManagingCursor(adapter.getCursor());
+				adapter.changeCursor(newCursor);
+			}
+		}
 	}
 }

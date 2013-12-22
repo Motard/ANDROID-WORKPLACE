@@ -36,8 +36,8 @@
             </intent-filter>
             
         </receiver>
-        <provider android:name="pt.flag.android_training.dummyhelloworld.providers.EmailProvider"
-            android:authorities="pt.flag.android_training.dummyhelloworld.providers.emailprovider"/>
+        <provider 	android:name="pt.flag.android_training.dummyhelloworld.providers.EmailProvider"
+            		android:authorities="pt.flag.android_training.dummyhelloworld.providers.EmailProvider"/>
         
         <service android:name="pt.flag.android_training.dummyhelloworld.services.AddEmailService"/>
         <service android:name="pt.flag.android_training.dummyhelloworld.services.RemoveEmailService"/>"

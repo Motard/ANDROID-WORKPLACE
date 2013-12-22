@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Ambulare</string>
+    <string name="action_settings">Settings</string>
+   	<string name="main_bt_write_location">Gravar Rota</string>
+	<string name="get_coor">COOR</string>
+   	
+</resources>

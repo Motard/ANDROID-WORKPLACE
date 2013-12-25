@@ -31,12 +31,12 @@
    		    android:id="@+id/activity_get_location_TV2"
    		    android:layout_width="wrap_content"
    		    android:layout_height="wrap_content"
-   		    android:text="unknown"
+   		    android:text="@string/desconhecido"
    		    android:textSize="20dip"/>
         
     </LinearLayout>
     
-     <LinearLayout 
+    <LinearLayout 
         android:id="@+id/activity_get_location_ll2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -54,10 +54,75 @@
    		    android:id="@+id/activity_get_location_TV4"
    		    android:layout_width="wrap_content"
    		    android:layout_height="wrap_content"
-   		    android:text="unknown"
+   		    android:text="@string/desconhecido"
    		    android:textSize="20dip"/>
         
     </LinearLayout>
     
-
+	<LinearLayout
+	    	android:id="@+id/activity_get_location_ll3"
+	    	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content">
+	  	  
+		<TextView
+		    android:id="@+id/tv_activity_get_location_accuracy"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="25dip"
+		    android:text="@string/tv_acuracy"/>
+	    
+		<TextView
+		    android:id="@+id/tv_activity_get_location_accuracy_value"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/desconhecido"/>
+		
+		<TextView
+		    android:id="@+id/tv_activity_get_location_altitude"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="10dip"
+		    android:text="@string/tv_altitude"/>
+	    
+		<TextView
+		    android:id="@+id/tv_activity_get_location_altitude_value"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/desconhecido"/>
+		
+		<TextView
+		    android:id="@+id/tv_activity_get_location_direcao"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="10dip"
+		    android:text="@string/tv_direcao"/>
+	    
+		<TextView
+		    android:id="@+id/tv_activity_get_location_direcao_value"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/desconhecido"/>
+	
+	</LinearLayout>
+	
+	<LinearLayout
+	    android:id="@+id/activity_get_location_ll4"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content">
+		
+	    	<TextView
+		    android:id="@+id/tv_activity_get_location_velocidade"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="50dip"
+		    android:text="@string/tv_velocidade"/>
+	    
+		<TextView
+		    android:id="@+id/tv_activity_get_location_velocidade_value"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/desconhecido"/>
+	    	
+	</LinearLayout>
+	
 </LinearLayout>

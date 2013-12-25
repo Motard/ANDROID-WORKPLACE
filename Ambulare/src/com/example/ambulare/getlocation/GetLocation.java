@@ -22,6 +22,10 @@ public class GetLocation extends Activity implements LocationListener{
 
 	private TextView _latitudeField;
 	private TextView _longitudeField;
+	private TextView _accurecyField;
+	private TextView _altitudeField;
+	private TextView _direcaoField;
+	private TextView _velocidadeField;
 	private LocationManager _locationManager;
 	private String _provider;
 	
@@ -33,11 +37,16 @@ public class GetLocation extends Activity implements LocationListener{
 		
 		_latitudeField = (TextView) findViewById(R.id.activity_get_location_TV2);
 		_longitudeField = (TextView) findViewById(R.id.activity_get_location_TV4);
+		_accurecyField = (TextView) findViewById(R.id.tv_activity_get_location_accuracy_value);
+		_altitudeField = (TextView) findViewById(R.id.tv_activity_get_location_altitude_value);
+		_direcaoField = (TextView) findViewById(R.id.tv_activity_get_location_direcao_value);
+		_velocidadeField = (TextView) findViewById(R.id.tv_activity_get_location_velocidade_value);
 		
 //		Defenir o backgroundColor dos layouts
 		((LinearLayout)findViewById(R.id.activity_get_location)).setBackgroundColor(Color.LTGRAY);
 		((LinearLayout) findViewById(R.id.activity_get_location_ll1)).setBackgroundColor(Color.GREEN);
 		((LinearLayout) findViewById(R.id.activity_get_location_ll2)).setBackgroundColor(Color.RED);
+		((LinearLayout) findViewById(R.id.activity_get_location_ll3)).setBackgroundColor(Color.YELLOW);
 	
 		
 //		Aceder ao LocationManager
@@ -53,6 +62,7 @@ public class GetLocation extends Activity implements LocationListener{
 		{
 			System.out.println("Provider " + _provider + " foi escolhido.");
 			onLocationChanged(location);
+			Toast.makeText(this, "Call onLocationChanged", Toast.LENGTH_SHORT).show();
 		}
 		else
 		{
@@ -70,17 +80,18 @@ public class GetLocation extends Activity implements LocationListener{
 			Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 			startActivity(intent);
 		}
-		else
-		{
-			Toast.makeText(this, "GPS Ligado",Toast.LENGTH_SHORT).show();
-		}
+//		else
+//		{
+//			Toast.makeText(this, "GPS Ligado",Toast.LENGTH_SHORT).show();
+//		}
 	}
 
 //	Fazer update ao resumir
 	@Override
 	protected void onResume() {
 		super.onResume();
-		_locationManager.requestLocationUpdates(_provider, 400, 1, this);
+//		TODO try catch para apanhar as exceções possiveis
+		_locationManager.requestLocationUpdates(_provider, 1000, 1, this);
 	}
 	
 	@Override
@@ -93,9 +104,20 @@ public class GetLocation extends Activity implements LocationListener{
 	public void onLocationChanged(Location location) {
 		double lat =  location.getLatitude();
 		double lng =  location.getLongitude();
+		float accurecy = location.getAccuracy();
+		double altitude = location.getAltitude();
+		float direcao = location.getBearing();
+		float velocidade = location.getSpeed();
+		String locationInfo = location.toString();
 		
 		_latitudeField.setText(String.format("%.4f", lat));
 		_longitudeField.setText(String.format("%.4f", lng));
+		_accurecyField.setText(String.valueOf(accurecy));
+		_altitudeField.setText(String.valueOf(altitude));
+		_direcaoField.setText(String.valueOf(direcao));
+		_velocidadeField.setText(String.valueOf(locationInfo));
+		
+		Toast.makeText(this, "Location Changed", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

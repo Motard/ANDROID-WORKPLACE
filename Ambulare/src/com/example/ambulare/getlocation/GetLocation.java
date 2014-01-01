@@ -14,6 +14,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class GetLocation extends Activity implements LocationListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_get_location);
 		
@@ -56,6 +58,20 @@ public class GetLocation extends Activity implements LocationListener{
 		Criteria criteria = new Criteria();
 		_provider = _locationManager.getBestProvider(criteria, true);
 		Location location = _locationManager.getLastKnownLocation(_provider);
+		
+		findViewById(R.id.get_location_bt_getlocation).setOnClickListener(new View.OnClickListener() 
+		{
+			
+			@Override
+			public void onClick(View v) 
+			{	
+				Toast.makeText(GetLocation.this, "NEW GPS", Toast.LENGTH_SHORT).show();
+				_locationManager.requestSingleUpdate(_provider, GetLocation.this, null);
+
+			}
+		});
+		
+//		Location location = _locationManager.getLastKnownLocation(_provider);
 	
 //		Inicializar os os campos de localização
 		if(location != null)
@@ -91,7 +107,7 @@ public class GetLocation extends Activity implements LocationListener{
 	protected void onResume() {
 		super.onResume();
 //		TODO try catch para apanhar as exceções possiveis
-		_locationManager.requestLocationUpdates(_provider, 1000, 1, this);
+//		_locationManager.requestLocationUpdates(_provider, 1000, 1, this);
 	}
 	
 	@Override
@@ -108,14 +124,14 @@ public class GetLocation extends Activity implements LocationListener{
 		double altitude = location.getAltitude();
 		float direcao = location.getBearing();
 		float velocidade = location.getSpeed();
-		String locationInfo = location.toString();
+		String locationInfo = location.toString(); //VAR_DUMP - Converter o conteudo do objecto numa String
 		
-		_latitudeField.setText(String.format("%.4f", lat));
+		_latitudeField.setText(String.format("%.4f", lat)); //Formata a String para apresentar apenas 4 casas decimais.
 		_longitudeField.setText(String.format("%.4f", lng));
 		_accurecyField.setText(String.valueOf(accurecy));
 		_altitudeField.setText(String.valueOf(altitude));
 		_direcaoField.setText(String.valueOf(direcao));
-		_velocidadeField.setText(String.valueOf(locationInfo));
+		_velocidadeField.setText(String.valueOf(velocidade));
 		
 		Toast.makeText(this, "Location Changed", Toast.LENGTH_SHORT).show();
 	}

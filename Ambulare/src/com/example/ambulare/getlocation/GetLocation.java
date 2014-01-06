@@ -15,6 +15,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class GetLocation extends Activity implements LocationListener{
 	private TextView _velocidadeField;
 	private LocationManager _locationManager;
 	private String _provider;
+	private String _rota;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -59,19 +61,19 @@ public class GetLocation extends Activity implements LocationListener{
 		_provider = _locationManager.getBestProvider(criteria, true);
 		Location location = _locationManager.getLastKnownLocation(_provider);
 		
-		findViewById(R.id.get_location_bt_getlocation).setOnClickListener(new View.OnClickListener() 
-		{
-			
-			@Override
-			public void onClick(View v) 
-			{	
-				Toast.makeText(GetLocation.this, "NEW GPS", Toast.LENGTH_SHORT).show();
-				_locationManager.requestSingleUpdate(_provider, GetLocation.this, null);
-
-			}
-		});
+//		findViewById(R.id.get_location_bt_getlocation).setOnClickListener(new View.OnClickListener() 
+//		{
+//			
+//			@Override
+//			public void onClick(View v) 
+//			{	
+//				Toast.makeText(GetLocation.this, "NEW GPS", Toast.LENGTH_SHORT).show();
+//				_locationManager.requestSingleUpdate(_provider, GetLocation.this, null);
+//
+//			}
+//		});
 		
-//		Location location = _locationManager.getLastKnownLocation(_provider);
+		
 	
 //		Inicializar os os campos de localização
 		if(location != null)
@@ -100,6 +102,13 @@ public class GetLocation extends Activity implements LocationListener{
 //		{
 //			Toast.makeText(this, "GPS Ligado",Toast.LENGTH_SHORT).show();
 //		}
+		
+//		Get nome da rota
+		
+		EditText et = (EditText)findViewById(R.id.et_activity_get_location_get_rota);
+    	_rota = et.getText().toString();
+    	
+    	Toast.makeText(this, _rota, Toast.LENGTH_SHORT).show();
 	}
 
 //	Fazer update ao resumir
@@ -107,7 +116,7 @@ public class GetLocation extends Activity implements LocationListener{
 	protected void onResume() {
 		super.onResume();
 //		TODO try catch para apanhar as exceções possiveis
-//		_locationManager.requestLocationUpdates(_provider, 1000, 1, this);
+		_locationManager.requestLocationUpdates(_provider, 1000, 1, this);
 	}
 	
 	@Override

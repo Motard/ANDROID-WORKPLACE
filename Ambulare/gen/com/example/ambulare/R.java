@@ -24,27 +24,28 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080014;
+        public static final int action_settings=0x7f080015;
         public static final int activity_get_location=0x7f080000;
-        public static final int activity_get_location_TV1=0x7f080003;
-        public static final int activity_get_location_TV2=0x7f080004;
-        public static final int activity_get_location_TV3=0x7f080006;
-        public static final int activity_get_location_TV4=0x7f080007;
-        public static final int activity_get_location_ll1=0x7f080002;
-        public static final int activity_get_location_ll2=0x7f080005;
-        public static final int activity_get_location_ll3=0x7f080008;
-        public static final int activity_get_location_ll4=0x7f08000f;
+        public static final int activity_get_location_TV1=0x7f080004;
+        public static final int activity_get_location_TV2=0x7f080005;
+        public static final int activity_get_location_TV3=0x7f080007;
+        public static final int activity_get_location_TV4=0x7f080008;
+        public static final int activity_get_location_ll1=0x7f080003;
+        public static final int activity_get_location_ll2=0x7f080006;
+        public static final int activity_get_location_ll3=0x7f080009;
+        public static final int activity_get_location_ll4=0x7f080010;
+        public static final int et_activity_get_location_get_rota=0x7f080002;
         public static final int get_location_bt_getlocation=0x7f080001;
-        public static final int layout_main=0x7f080012;
-        public static final int main_bt_write_location=0x7f080013;
-        public static final int tv_activity_get_location_accuracy=0x7f080009;
-        public static final int tv_activity_get_location_accuracy_value=0x7f08000a;
-        public static final int tv_activity_get_location_altitude=0x7f08000b;
-        public static final int tv_activity_get_location_altitude_value=0x7f08000c;
-        public static final int tv_activity_get_location_direcao=0x7f08000d;
-        public static final int tv_activity_get_location_direcao_value=0x7f08000e;
-        public static final int tv_activity_get_location_velocidade=0x7f080010;
-        public static final int tv_activity_get_location_velocidade_value=0x7f080011;
+        public static final int layout_main=0x7f080013;
+        public static final int main_bt_write_location=0x7f080014;
+        public static final int tv_activity_get_location_accuracy=0x7f08000a;
+        public static final int tv_activity_get_location_accuracy_value=0x7f08000b;
+        public static final int tv_activity_get_location_altitude=0x7f08000c;
+        public static final int tv_activity_get_location_altitude_value=0x7f08000d;
+        public static final int tv_activity_get_location_direcao=0x7f08000e;
+        public static final int tv_activity_get_location_direcao_value=0x7f08000f;
+        public static final int tv_activity_get_location_velocidade=0x7f080011;
+        public static final int tv_activity_get_location_velocidade_value=0x7f080012;
     }
     public static final class layout {
         public static final int activity_get_location=0x7f030000;
@@ -58,6 +59,7 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int desconhecido=0x7f050004;
         public static final int get_coor=0x7f050003;
+        public static final int get_rota_hint=0x7f050009;
         public static final int main_bt_write_location=0x7f050002;
         public static final int tv_acuracy=0x7f050005;
         public static final int tv_altitude=0x7f050006;

@@ -12,5 +12,7 @@
 	<string name="tv_altitude">Altitude : </string>
 	<string name="tv_direcao">Direcção : </string>
 	<string name="tv_velocidade">Velocidade : </string>
+	
+	<string name="get_rota_hint">Introduza nome da rota</string>
    	
 </resources>

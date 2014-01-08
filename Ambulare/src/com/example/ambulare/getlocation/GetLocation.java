@@ -32,12 +32,21 @@ public class GetLocation extends Activity implements LocationListener{
 	private String _provider;
 	private String _rota;
 	
+	public static final String NOME_ROTA = "xpto";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_get_location);
+		
+//		receber o nome da rota via extra do intent
+		Intent intt = getIntent();
+		String nome_rota = intt.getStringExtra(NOME_ROTA);
+//		Bundle b = intt.getExtras();
+//		Object obj = b.get("pabm");
+		((TextView) findViewById(R.id.nome_rota)).setText(nome_rota);
 		
 		_latitudeField = (TextView) findViewById(R.id.activity_get_location_TV2);
 		_longitudeField = (TextView) findViewById(R.id.activity_get_location_TV4);
@@ -105,8 +114,7 @@ public class GetLocation extends Activity implements LocationListener{
 		
 //		Get nome da rota
 		
-		EditText et = (EditText)findViewById(R.id.et_activity_get_location_get_rota);
-    	_rota = et.getText().toString();
+		
     	
     	Toast.makeText(this, _rota, Toast.LENGTH_SHORT).show();
 	}

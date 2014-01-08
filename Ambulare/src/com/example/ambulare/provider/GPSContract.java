@@ -6,15 +6,15 @@ import android.provider.BaseColumns;
 public class GPSContract {
 
 //	Nome da tabela
-	public static final String table = "Rotas";
+	public static final String TABLE = "Rotas";
 	
 //	Nome das colunas
 	public static final String 	_ID = BaseColumns._ID,
 								Lat = "Latitude",
 								Lng = "Longitude",
-								Alt = "Altitude";
+								Alt = "Altitude",
+							    Rota = "NomeRota";
 	
-//	TODO
-//	URI CONTENT_URI
+	public static Uri CONTENT_URI = Uri.withAppendedPath(GPSProvider.CONTENT_URI, TABLE);
 	
 }

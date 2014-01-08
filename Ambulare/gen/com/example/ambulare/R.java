@@ -34,10 +34,10 @@ public final class R {
         public static final int activity_get_location_ll2=0x7f080006;
         public static final int activity_get_location_ll3=0x7f080009;
         public static final int activity_get_location_ll4=0x7f080010;
-        public static final int et_activity_get_location_get_rota=0x7f080002;
         public static final int get_location_bt_getlocation=0x7f080001;
         public static final int layout_main=0x7f080013;
         public static final int main_bt_write_location=0x7f080014;
+        public static final int nome_rota=0x7f080002;
         public static final int tv_activity_get_location_accuracy=0x7f08000a;
         public static final int tv_activity_get_location_accuracy_value=0x7f08000b;
         public static final int tv_activity_get_location_altitude=0x7f08000c;

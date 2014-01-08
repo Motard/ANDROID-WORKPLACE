@@ -4,11 +4,13 @@ import com.example.ambulare.getlocation.GetLocation;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity {
@@ -25,12 +27,27 @@ public class MainActivity extends Activity {
 		relativeLayout.setBackgroundColor(Color.DKGRAY);
         
 //		Change activity to get gps position
-		findViewById(R.id.main_bt_write_location).setOnClickListener(new OnClickListener() {
+		findViewById(R.id.main_bt_write_location).setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Intent mudaEcra = new Intent(MainActivity.this, GetLocation.class);
-				startActivity(mudaEcra);
+				
+				final EditText editText = new EditText(MainActivity.this);
+				new AlertDialog.Builder(MainActivity.this).setTitle("Nova Rota")
+				 .setNegativeButton("cancel", null)
+				 .setPositiveButton("add", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent mudaEcra = new Intent(MainActivity.this, GetLocation.class);
+						mudaEcra.putExtra(GetLocation.NOME_ROTA, editText.getText().toString());
+						startActivity(mudaEcra);
+//						startService(intent);
+					}
+				})
+				.setView(editText)// Returns a Builder
+				.create() //Returns an AlertDialog
+				.show();
 			}
 		});
 	}

@@ -1,14 +1,39 @@
 package com.example.ambulare.provider;
 
-import pt.flag.android_training.dummyhelloworld.providers.EmailsContract;
 import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 
 public class GPSProvider extends ContentProvider {
 
+	private SQLiteOpenHelper helper;
+	
+	public static final String AUTHORITY = "com.example.ambulare.provider.gpsprovider";
+	
+	
+	public static final Uri CONTENT_URI = Uri.parse(ContentResolver.SCHEME_CONTENT + "://" + AUTHORITY);
+	
+	private static UriMatcher URIMATCHER = new UriMatcher(UriMatcher.NO_MATCH);
+	private static final int ROTA_ID = 1;
+	private static final int ROTA_ALL = 2;
+	
+	private static final String MIME_ALL = "vnd.android.cursor.dir/vnd.com.example.ambulare.provider." + GPSContract.TABLE;
+	private static final String MIME_ONE = "vnd.android.cursor.item/vnd.com.example.ambulare.provider." + GPSContract.TABLE;
+
+	static {
+		
+		URIMATCHER.addURI(AUTHORITY, GPSContract.TABLE+"/#", ROTA_ID);
+		URIMATCHER.addURI(AUTHORITY, GPSContract.TABLE, ROTA_ALL);
+	}
+	
+	
+	
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
 		// TODO Auto-generated method stub
@@ -29,8 +54,8 @@ public class GPSProvider extends ContentProvider {
 
 	@Override
 	public boolean onCreate() {
-		// TODO Auto-generated method stub
-		return false;
+		helper = new GPSHelper(getContext());
+		return true;
 	}
 
 	@Override
@@ -47,13 +72,33 @@ public class GPSProvider extends ContentProvider {
 		return 0;
 	}
 	
-	public void onCreate(SQLiteDatabase db) 
+	
+	
+	private class GPSHelper extends SQLiteOpenHelper
 	{
-		String columns = EmailsContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-						 EmailsContract.EMAIL + " TEXT NOT NULL";
-		
-		String sql = "CREATE TABLE IF NOT EXISTS " + EmailsContract.TABLE + " (" + columns + ")";
-		db.execSQL(sql);
+
+		public GPSHelper(Context context) 
+		{
+			super(context, "rotas.db", null, 1);
+			
+		}
+
+		public void onCreate(SQLiteDatabase db) 
+		{
+			String columns = GPSContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+							 GPSContract.Alt + " TEXT NOT NULL, "+
+							 GPSContract.Lat + " TEXT NOT NULL, "+
+							 GPSContract.Lng + " TEXT NOT NULL";
+			
+			String sql = "CREATE TABLE IF NOT EXISTS " + GPSContract.TABLE + " (" + columns + ")";
+			db.execSQL(sql);
+		}
+
+		@Override
+		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+			// TODO When need code for database upgrade
+			
+		}
 	}
 
 }

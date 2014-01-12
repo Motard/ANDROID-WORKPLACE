@@ -3,7 +3,11 @@ package com.example.ambulare.getlocation;
 
 import java.text.Format;
 
+
+
 import com.example.ambulare.R;
+import com.example.ambulare.services.AddLocationService;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +36,12 @@ public class GetLocation extends Activity implements LocationListener{
 	private String _provider;
 	private String _rota;
 	
-	public static final String NOME_ROTA = "xpto";
+	public static final String NOME_ROTA = "rota";
+
+//	Defenir constantes para enviar os valores a guardar como extra nos intents 
+	public static final String LAT = "lat";
+	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -41,11 +50,12 @@ public class GetLocation extends Activity implements LocationListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_get_location);
 		
-//		receber o nome da rota via extra do intent
+//		receber o nome da rota via extra do intent 
 		Intent intt = getIntent();
-		String nome_rota = intt.getStringExtra(NOME_ROTA);
 //		Bundle b = intt.getExtras();
 //		Object obj = b.get("pabm");
+
+		String nome_rota = intt.getStringExtra(NOME_ROTA);
 		((TextView) findViewById(R.id.nome_rota)).setText(nome_rota);
 		
 		_latitudeField = (TextView) findViewById(R.id.activity_get_location_TV2);
@@ -124,7 +134,7 @@ public class GetLocation extends Activity implements LocationListener{
 	protected void onResume() {
 		super.onResume();
 //		TODO try catch para apanhar as exceções possiveis
-		_locationManager.requestLocationUpdates(_provider, 1000, 1, this);
+		_locationManager.requestLocationUpdates(_provider, 10000, 1, this);
 	}
 	
 	@Override
@@ -151,6 +161,12 @@ public class GetLocation extends Activity implements LocationListener{
 		_velocidadeField.setText(String.valueOf(velocidade));
 		
 		Toast.makeText(this, "Location Changed", Toast.LENGTH_SHORT).show();
+		
+//		este bloco vai chamar o serviço que vai gravar os valores na base de dados
+		
+		Intent intent = new Intent(this, AddLocationService.class);
+		intent.putExtra(LAT, lat);
+		startService(intent);
 	}
 
 	@Override

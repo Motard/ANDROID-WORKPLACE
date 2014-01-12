@@ -1,7 +1,9 @@
 package com.example.ambulare.provider;
 
+
 import android.content.ContentProvider;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
@@ -32,8 +34,6 @@ public class GPSProvider extends ContentProvider {
 		URIMATCHER.addURI(AUTHORITY, GPSContract.TABLE, ROTA_ALL);
 	}
 	
-	
-	
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
 		// TODO Auto-generated method stub
@@ -48,8 +48,18 @@ public class GPSProvider extends ContentProvider {
 
 	@Override
 	public Uri insert(Uri uri, ContentValues values) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		SQLiteDatabase db = helper.getWritableDatabase();
+		try
+		{
+			long row = db.insert(GPSContract.TABLE, null, values);
+			return (row == -1)? null:ContentUris.withAppendedId(uri, row);
+		}
+		finally
+		{
+			db.close();
+			
+		}
 	}
 
 	@Override
@@ -86,6 +96,7 @@ public class GPSProvider extends ContentProvider {
 		public void onCreate(SQLiteDatabase db) 
 		{
 			String columns = GPSContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+							 GPSContract.Rota + "TEXT NOT NULL"+
 							 GPSContract.Alt + " TEXT NOT NULL, "+
 							 GPSContract.Lat + " TEXT NOT NULL, "+
 							 GPSContract.Lng + " TEXT NOT NULL";

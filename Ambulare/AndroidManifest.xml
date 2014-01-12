@@ -26,7 +26,11 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.ambulare.getlocation.GetLocation"></activity>
-        <service android:name="com.example.ambulare.services.AddLocationService"></service>
+        
+        <provider 	android:authorities="com.example.ambulare.provider.GPSProvider"
+            		android:name="com.example.ambulare.provider.GPSProvider"/>
+        
+        <service android:name="com.example.ambulare.services.AddLocationService"/>
     </application>
 
 </manifest>

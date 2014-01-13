@@ -9,17 +9,14 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.provider.Settings;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class GetLocationService extends Service implements LocationListener {
 
 
 	private LocationManager _locationManager;
-
-	private String 	_provider,
-					_rota;
+	private String 			_provider,
+							_rota;
 
 //Defenir constantes para enviar os valores a guardar como extra nos intents 
 	public static final String 	NOME_ROTA = "rota",
@@ -27,8 +24,7 @@ public class GetLocationService extends Service implements LocationListener {
 								LNG = "lng",
 								ALT = "alt";
 	
-	
-	
+
 	@Override
 	public void onCreate() {
 		
@@ -40,7 +36,6 @@ public class GetLocationService extends Service implements LocationListener {
 //		Defenir o criterio para escolher o location provider -> use default
 		Criteria criteria = new Criteria();
 		_provider = _locationManager.getBestProvider(criteria, true);
-
 		_locationManager.requestLocationUpdates(_provider, 400, 1, this);
 		
 		Toast.makeText(this, "GetLocationService started", Toast.LENGTH_SHORT).show();
@@ -52,25 +47,7 @@ public class GetLocationService extends Service implements LocationListener {
 //		receber o nome da rota via extra do intent 
 		
 		_rota = intent.getStringExtra(NOME_ROTA);
-		
-		Location location = _locationManager.getLastKnownLocation(_provider);
-
-		
-
-////		ver se o serviço de GPS esta ligado
-//		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-//		boolean enabled = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
-//		
-//		if(!enabled)
-//		{
-//			Intent gps_settings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-//			startActivity(gps_settings);
-//		}
-//		else
-//		{
-//			Toast.makeText(this, "GPS Ligado",Toast.LENGTH_SHORT).show();
-//		}	
-//		
+				
 		return super.onStartCommand(intent, flags, startId);
 	
 	}
@@ -81,23 +58,9 @@ public class GetLocationService extends Service implements LocationListener {
 		
 		double lat =  location.getLatitude();
 		double lng =  location.getLongitude();
-		float accurecy = location.getAccuracy();
 		double altitude = location.getAltitude();
-		float direcao = location.getBearing();
-		float velocidade = location.getSpeed();
-		String locationInfo = location.toString(); //VAR_DUMP - Converter o conteudo do objecto numa String
 		
-		
-////		Print Screen dos valores obtidos
-//		
-//		_latitudeField.setText(String.format("%.4f", lat)); //Formata a String para apresentar apenas 4 casas decimais.
-//		_longitudeField.setText(String.format("%.4f", lng));
-//		_accurecyField.setText(String.valueOf(accurecy));
-//		_altitudeField.setText(String.valueOf(altitude));
-//		_direcaoField.setText(String.valueOf(direcao));
-//		_velocidadeField.setText(String.valueOf(velocidade));
-		
-		Toast.makeText(this, "Location Changed", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "new location", Toast.LENGTH_SHORT).show();
 		
 //		este bloco vai arrancar o serviço que trata com a BD e envia os valores a guardar
 		
@@ -129,13 +92,15 @@ public class GetLocationService extends Service implements LocationListener {
 	}
 
 	@Override
-	public boolean stopService(Intent name) {
+	public boolean stopService(Intent name) 
+	{
 		
 		return super.stopService(name);
 	}
 	
 	@Override
-	public void onDestroy() {
+	public void onDestroy() 
+	{
 
 		_locationManager.removeUpdates(this);
 		
@@ -143,10 +108,8 @@ public class GetLocationService extends Service implements LocationListener {
 	}
 	
 	@Override
-	public IBinder onBind(Intent intent) {
-
-		
-		
+	public IBinder onBind(Intent intent) 
+	{
 		
 		return null;
 	}

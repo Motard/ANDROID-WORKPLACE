@@ -42,8 +42,8 @@ public class GPSProvider extends ContentProvider {
 
 	@Override
 	public String getType(Uri uri) {
-		// TODO Auto-generated method stub
-		return null;
+		return URIMATCHER.match(uri) == ROTA_ALL ? MIME_ALL : MIME_ONE;
+		
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class GPSProvider extends ContentProvider {
 		public void onCreate(SQLiteDatabase db) 
 		{
 			String columns = GPSContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-							 GPSContract.Rota + "TEXT NOT NULL"+
+							 GPSContract.Rota + " TEXT NOT NULL, "+
 							 GPSContract.Alt + " TEXT NOT NULL, "+
 							 GPSContract.Lat + " TEXT NOT NULL, "+
 							 GPSContract.Lng + " TEXT NOT NULL";

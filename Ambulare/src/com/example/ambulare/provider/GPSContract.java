@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
 public class GPSContract {
 
 //	Nome da tabela
-	public static final String TABLE = "table";
+	public static final String TABLE = "rotas";
 	
 //	Nome das colunas
 	public static final String 	_ID = BaseColumns._ID,

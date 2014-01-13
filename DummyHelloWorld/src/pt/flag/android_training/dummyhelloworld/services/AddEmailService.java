@@ -2,10 +2,9 @@ package pt.flag.android_training.dummyhelloworld.services;
 
 import pt.flag.android_training.dummyhelloworld.providers.EmailsContract;
 import android.app.IntentService;
-import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.os.IBinder;
+
 
 public class AddEmailService extends IntentService {
 

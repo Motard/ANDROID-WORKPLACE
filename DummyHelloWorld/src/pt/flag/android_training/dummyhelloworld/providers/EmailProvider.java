@@ -1,5 +1,4 @@
 package pt.flag.android_training.dummyhelloworld.providers;
-
 import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -8,7 +7,6 @@ import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 
@@ -26,6 +24,7 @@ public class EmailProvider extends ContentProvider {
 	
 	private static final String MIME_ALL = "vnd.android.cursor.dir/vnd.pt.flag.android_training.dummyhelloworld.providers." + EmailsContract.TABLE;
 	private static final String MIME_ONE = "vnd.android.cursor.item/vnd.pt.flag.android_training.dummyhelloworld.providers." + EmailsContract.TABLE;
+
 
 	static {
 		

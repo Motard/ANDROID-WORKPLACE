@@ -37,7 +37,7 @@
             
         </receiver>
         <provider 	android:name="pt.flag.android_training.dummyhelloworld.providers.EmailProvider"
-            		android:authorities="pt.flag.android_training.dummyhelloworld.providers.EmailProvider"/>
+            		android:authorities="pt.flag.android_training.dummyhelloworld.providers.emailprovider"/>
         
         <service android:name="pt.flag.android_training.dummyhelloworld.services.AddEmailService"/>
         <service android:name="pt.flag.android_training.dummyhelloworld.services.RemoveEmailService"/>"

@@ -1,6 +1,6 @@
 package com.example.ambulare.services;
 
-import com.example.ambulare.getlocation.GetLocation;
+
 import com.example.ambulare.provider.GPSContract;
 
 import android.app.IntentService;
@@ -36,16 +36,16 @@ public class AddLocationService extends IntentService {
 		
 		Bundle bundle = intent.getExtras();
 		
-		Object obj = bundle.get(GetLocation.LAT);
-		final String lat = bundle.get(GetLocation.LAT).toString();
+		Object obj = bundle.get(GetLocationService.LAT);
+		final String lat = bundle.get(GetLocationService.LAT).toString();
 		
-		obj = bundle.get(GetLocation.LNG);
+		obj = bundle.get(GetLocationService.LNG);
 		final String lng = obj.toString();
 		
-		obj = bundle.get(GetLocation.ALT);
+		obj = bundle.get(GetLocationService.ALT);
 		final String alt = obj.toString();
 		
-		obj = bundle.get(GetLocation.NOME_ROTA);
+		obj = bundle.get(GetLocationService.NOME_ROTA);
 		final String rota = obj.toString();
 		
 //		Insert in the BD
@@ -57,16 +57,16 @@ public class AddLocationService extends IntentService {
 		values.put(GPSContract.Alt, alt);
 		getContentResolver().insert(GPSContract.CONTENT_URI,values);
 			
-		_handler.post(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(AddLocationService.this, "SERVICE ADD LOCATION" +
-														" * Latitude " + lat + 
-														" * Longitude " + lng + 
-														" * Altitude " + alt + 
-														" * Rota " + rota, Toast.LENGTH_LONG).show();
-			}
-		});
+//		_handler.post(new Runnable() {
+//			@Override
+//			public void run() {
+//				Toast.makeText(AddLocationService.this, "SERVICE ADD LOCATION" +
+//														" * Latitude " + lat + 
+//														" * Longitude " + lng + 
+//														" * Altitude " + alt + 
+//														" * Rota " + rota, Toast.LENGTH_LONG).show();
+//			}
+//		});
 		
 		Log.d("ROTAS", "SERVICE ADD LOCATION" +" * Latitude " + lat + 
 											   " * Longitude " + lng + 

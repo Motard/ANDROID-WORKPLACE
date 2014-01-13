@@ -1,6 +1,6 @@
 package com.example.ambulare;
 
-import com.example.ambulare.getlocation.GetLocation;
+
 import com.example.ambulare.services.GetLocationService;
 
 import android.os.Bundle;
@@ -20,8 +20,9 @@ public class MainActivity extends Activity {
 	
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		RelativeLayout relativeLayout;
+	protected void onCreate(Bundle savedInstanceState) 
+	{
+		RelativeLayout relativeLayout;	
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -32,26 +33,38 @@ public class MainActivity extends Activity {
         
 //		Ver o estado do recording
 		AmbulareApplication app = (AmbulareApplication) getApplication();
-		if (!app.isRecordingRoute())
+		if (app.isRecordingRoute())
 		{
+			((TextView)findViewById(R.id.main_bt_write_location)).setText("STOP");
+		}
 		
 	//		Change activity to get gps position
-			findViewById(R.id.main_bt_write_location).setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.main_bt_write_location).setOnClickListener(new View.OnClickListener() 
+		{
 				
-				@Override
-				public void onClick(View v) {
+			@Override
+			public void onClick(View v) 
+			{
+				
+				if (!((AmbulareApplication) getApplication()).isRecordingRoute())
+				{
+				
 					
 					final EditText editText = new EditText(MainActivity.this);
 					new AlertDialog.Builder(MainActivity.this).setTitle("Nova Rota")
 					 .setNegativeButton("cancel", null)
-					 .setPositiveButton("add", new DialogInterface.OnClickListener() {
+					 .setPositiveButton("add", new DialogInterface.OnClickListener() 
+					 {
 						
 						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							Intent gravarRota = new Intent(MainActivity.this, GetLocation.class);
+						public void onClick(DialogInterface dialog, int which) 
+						{
+							((TextView)findViewById(R.id.main_bt_write_location)).setText("STOP");
+							
+							Intent gravarRota = new Intent(MainActivity.this, GetLocationService.class);
 							gravarRota.putExtra(GetLocationService.NOME_ROTA, editText.getText().toString());
-//							startActivity(mudaEcra);
 							startService(gravarRota);
+							
 							((AmbulareApplication) getApplication()).setRecording(true);
 						}
 					})
@@ -59,25 +72,19 @@ public class MainActivity extends Activity {
 					.create() //Returns an AlertDialog
 					.show();
 				}
-			});
-		}
-		else
-		{
-			((TextView)findViewById(R.id.main_bt_write_location)).setText("STOP");
-			findViewById(R.id.main_bt_write_location).setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					((AmbulareApplication) getApplication()).setRecording(false);
+				else
+				{
 					((TextView)findViewById(R.id.main_bt_write_location)).setText("GRAVAR");
+					
+					stopService(new Intent(MainActivity.this, GetLocationService.class));
+					
+					((AmbulareApplication) getApplication()).setRecording(false);
 				}
-			});
-			
-			
-			app.setRecording(false);
-		}
-		
+			}
+		});		
 	}
+		
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

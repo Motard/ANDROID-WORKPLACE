@@ -26,6 +26,9 @@ public class GetLocationService extends Service implements LocationListener {
 								LAT = "lat",
 								LNG = "lng",
 								ALT = "alt";
+	
+	
+	
 	@Override
 	public void onCreate() {
 		
@@ -39,6 +42,8 @@ public class GetLocationService extends Service implements LocationListener {
 		_provider = _locationManager.getBestProvider(criteria, true);
 
 		_locationManager.requestLocationUpdates(_provider, 400, 1, this);
+		
+		Toast.makeText(this, "GetLocationService started", Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override
@@ -124,8 +129,25 @@ public class GetLocationService extends Service implements LocationListener {
 	}
 
 	@Override
+	public boolean stopService(Intent name) {
+		
+		return super.stopService(name);
+	}
+	
+	@Override
+	public void onDestroy() {
+
+		_locationManager.removeUpdates(this);
+		
+		super.onDestroy();
+	}
+	
+	@Override
 	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
+
+		
+		
+		
 		return null;
 	}
 

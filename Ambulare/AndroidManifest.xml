@@ -27,13 +27,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.ambulare.getlocation.GetLocation"></activity>
+        
         
         <provider 	
             android:name="com.example.ambulare.provider.GPSProvider"
             			  
             android:authorities="com.example.ambulare.provider.gpsprovider"	/>
         
+        <service android:name="com.example.ambulare.services.GetLocationService"/>
         <service android:name="com.example.ambulare.services.AddLocationService"/>
     </application>
 

@@ -1,6 +1,7 @@
 package com.example.ambulare;
 
 import com.example.ambulare.getlocation.GetLocation;
+import com.example.ambulare.services.GetLocationService;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -47,10 +48,10 @@ public class MainActivity extends Activity {
 						
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							Intent mudaEcra = new Intent(MainActivity.this, GetLocation.class);
-							mudaEcra.putExtra(GetLocation.NOME_ROTA, editText.getText().toString());
-							startActivity(mudaEcra);
-	//						startService(intent);
+							Intent gravarRota = new Intent(MainActivity.this, GetLocation.class);
+							gravarRota.putExtra(GetLocationService.NOME_ROTA, editText.getText().toString());
+//							startActivity(mudaEcra);
+							startService(gravarRota);
 							((AmbulareApplication) getApplication()).setRecording(true);
 						}
 					})
@@ -63,6 +64,16 @@ public class MainActivity extends Activity {
 		else
 		{
 			((TextView)findViewById(R.id.main_bt_write_location)).setText("STOP");
+			findViewById(R.id.main_bt_write_location).setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					((AmbulareApplication) getApplication()).setRecording(false);
+					((TextView)findViewById(R.id.main_bt_write_location)).setText("GRAVAR");
+				}
+			});
+			
+			
 			app.setRecording(false);
 		}
 		

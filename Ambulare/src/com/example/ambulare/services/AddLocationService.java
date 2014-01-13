@@ -36,17 +36,11 @@ public class AddLocationService extends IntentService {
 		
 		Bundle bundle = intent.getExtras();
 		
-		Object obj = bundle.get(GetLocationService.LAT);
-		final String lat = bundle.get(GetLocationService.LAT).toString();
+		String lat = bundle.get(GetLocationService.LAT).toString();
+		String lng = bundle.get(GetLocationService.LNG).toString();
+		String alt = bundle.get(GetLocationService.ALT).toString();
+		String rota = bundle.get(GetLocationService.NOME_ROTA).toString();
 		
-		obj = bundle.get(GetLocationService.LNG);
-		final String lng = obj.toString();
-		
-		obj = bundle.get(GetLocationService.ALT);
-		final String alt = obj.toString();
-		
-		obj = bundle.get(GetLocationService.NOME_ROTA);
-		final String rota = obj.toString();
 		
 //		Insert in the BD
 		

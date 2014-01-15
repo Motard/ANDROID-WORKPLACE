@@ -71,8 +71,11 @@ public class GPSProvider extends ContentProvider {
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
-		// TODO Auto-generated method stub
-		return null;
+		SQLiteDatabase db = helper.getReadableDatabase();
+		
+		return db.query(GPSContract.TABLE, projection, selection, selectionArgs, GPSContract.Rota, null,  GPSContract.Rota);
+		
+		
 	}
 
 	@Override

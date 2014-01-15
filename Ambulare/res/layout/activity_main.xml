@@ -18,4 +18,14 @@
         android:layout_marginTop="165dp"
         android:text="@string/main_bt_write_location" />
 
+    <Button
+        android:id="@+id/main_bt_ver_BD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/main_bt_write_location"
+        android:layout_alignBottom="@+id/main_bt_write_location"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:text="@string/main_bt_ver_BD" />
+
 </RelativeLayout>

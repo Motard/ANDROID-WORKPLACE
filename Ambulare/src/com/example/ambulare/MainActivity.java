@@ -81,9 +81,25 @@ public class MainActivity extends Activity {
 					((AmbulareApplication) getApplication()).setRecording(false);
 				}
 			}
-		});		
+		});
+		
+		
+		findViewById(R.id.main_bt_ver_BD).setOnClickListener(new View.OnClickListener() {
+			 
+			@Override
+			public void onClick(View v) {
+				
+				Intent lerBD = new Intent(MainActivity.this, ReadBD.class);
+				startActivity(lerBD);
+				
+			}
+		});
 	}
 		
+	
+	
+	
+	
 	
 
 	@Override

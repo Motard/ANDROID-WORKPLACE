@@ -91,12 +91,7 @@ public class GetLocationService extends Service implements LocationListener {
 
 	}
 
-	@Override
-	public boolean stopService(Intent name) 
-	{
-		
-		return super.stopService(name);
-	}
+	
 	
 	@Override
 	public void onDestroy() 
@@ -113,5 +108,6 @@ public class GetLocationService extends Service implements LocationListener {
 		
 		return null;
 	}
-
+	
+	
 }

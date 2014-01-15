@@ -4,6 +4,7 @@
     <string name="app_name">Ambulare</string>
     <string name="action_settings">Settings</string>
    	<string name="main_bt_write_location">Gravar Rota</string>
+   	<string name="main_bt_ver_BD">Ver Rotas</string>
 	<string name="get_coor">COOR</string>
 	
 	<string name="desconhecido">N/A</string>

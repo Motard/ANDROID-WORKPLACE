@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 public class GetLocationService extends Service implements LocationListener {
@@ -53,7 +54,15 @@ public class GetLocationService extends Service implements LocationListener {
 		intent1.putExtra(NOME_ROTA, _rota);
 		startService(intent1);
 		
-		Toast.makeText(this, "GetLocationService started " + _rota, Toast.LENGTH_SHORT).show();
+//		Toast.makeText(this, "GetLocationService started " + _rota, Toast.LENGTH_SHORT).show();
+		
+		AddRotaService obj = new AddRotaService();
+		
+		long id = obj.getRota_id();
+		
+		Toast.makeText(this, "Id da rota introduzida - " + id, Toast.LENGTH_SHORT).show();
+		
+		Log.d("xpto", "ID da rota introduzida" + id);
 				
 		return super.onStartCommand(intent, flags, startId);
 	}

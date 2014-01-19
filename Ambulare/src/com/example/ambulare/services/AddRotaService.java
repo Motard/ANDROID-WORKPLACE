@@ -12,6 +12,8 @@ import android.util.Log;
 
 public class AddRotaService extends IntentService {
 
+	long rota_id;
+	
 	public AddRotaService() {
 		super("rotas");
 		
@@ -29,16 +31,23 @@ public class AddRotaService extends IntentService {
 		
 		ContentValues values = new ContentValues();
 		values.put(GPSContract.NOME_ROTA, rota);
-		getContentResolver().insert(GPSContract.CONTENT_URI_ROTAS, values);
+		Uri myNewUri = getContentResolver().insert(GPSContract.CONTENT_URI_ROTAS, values);
+		
 		Log.d("rota", "adicionar nova rota " + rota );
+		
+		
 //		retirar o ID do insert que foi feito
 		
-//		String s = myNewUri.toString();
-		
-//		long id = ContentUris.parseId(myNewUri);
+		rota_id = ContentUris.parseId(myNewUri);
 //		
 //		Log.d("rota", "adicionar nova rota " + rota + "/n URI - " + id);
 
 	}
+
+	public long getRota_id() {
+		return rota_id;
+	}
+	
+	
 
 }

@@ -1,5 +1,6 @@
 package com.example.ambulare.services;
 
+import com.example.ambulare.AmbulareApplication;
 import com.example.ambulare.provider.GPSContract;
 
 import android.app.IntentService;
@@ -33,14 +34,14 @@ public class AddRotaService extends IntentService {
 		values.put(GPSContract.NOME_ROTA, rota);
 		Uri myNewUri = getContentResolver().insert(GPSContract.CONTENT_URI_ROTAS, values);
 		
-		Log.d("rota", "adicionar nova rota " + rota );
-		
-		
 //		retirar o ID do insert que foi feito
 		
 		rota_id = ContentUris.parseId(myNewUri);
-//		
-//		Log.d("rota", "adicionar nova rota " + rota + "/n URI - " + id);
+		
+//		afetar a variavel de classe da AmbulareApplication 
+		((AmbulareApplication) getApplication()).set_rota_id(rota_id);
+		
+		Log.d("ARS", "adicionar nova rota " + rota + " URI - " + rota_id);
 
 	}
 

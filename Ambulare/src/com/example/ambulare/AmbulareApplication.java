@@ -6,6 +6,7 @@ public class AmbulareApplication extends Application
 {
 	
 	private boolean _recording;
+	private long _rota_id;
 	
 	@Override
 	public void onCreate() 
@@ -24,4 +25,13 @@ public class AmbulareApplication extends Application
 		_recording = state;
 	}
 
+	public long get_rota_id() {
+		return _rota_id;
+	}
+
+	public void set_rota_id(long _rota_id) {
+		this._rota_id = _rota_id;
+	}
+
+	
 }

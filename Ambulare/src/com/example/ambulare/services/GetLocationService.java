@@ -1,5 +1,7 @@
 package com.example.ambulare.services;
 
+import com.example.ambulare.AmbulareApplication;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +21,7 @@ public class GetLocationService extends Service implements LocationListener {
 	private String 			_provider,
 							_rota;
 
-//Defenir constantes para enviar os valores a guardar como extra nos intents 
+	//Defenir constantes para enviar os valores a guardar como extra nos intents 
 	public static final String 	NOME_ROTA = "rota",
 								LAT = "lat",
 								LNG = "lng",
@@ -56,19 +58,20 @@ public class GetLocationService extends Service implements LocationListener {
 		
 //		Toast.makeText(this, "GetLocationService started " + _rota, Toast.LENGTH_SHORT).show();
 		
-		AddRotaService obj = new AddRotaService();
 		
-		long id = obj.getRota_id();
-		
-		Toast.makeText(this, "Id da rota introduzida - " + id, Toast.LENGTH_SHORT).show();
-		
-		Log.d("xpto", "ID da rota introduzida" + id);
 				
 		return super.onStartCommand(intent, flags, startId);
 	}
 	
 	@Override
 	public void onLocationChanged(Location location) {
+		
+//		obter o id da rota introduzida
+		long rota_id = ((AmbulareApplication) getApplication()).get_rota_id();
+		
+		Toast.makeText(this, "Id da rota introduzida - " + rota_id, Toast.LENGTH_SHORT).show();
+		Log.d("GLS", "ID da rota introduzida " + rota_id);
+		
 //		aceder ao location e obter os dados da posição
 		
 		double lat =  location.getLatitude();

@@ -45,11 +45,11 @@ public class AddLocationService extends IntentService {
 //		Insert in the BD
 		
 		ContentValues values = new ContentValues();
-		values.put(GPSContract.Rota, rota);
-		values.put(GPSContract.Lat, lat);
-		values.put(GPSContract.Lng, lng);
-		values.put(GPSContract.Alt, alt);
-		getContentResolver().insert(GPSContract.CONTENT_URI,values);
+		values.put(GPSContract.ROTA_ID, rota);
+		values.put(GPSContract.LAT, lat);
+		values.put(GPSContract.LNG, lng);
+		values.put(GPSContract.ALT, alt);
+		getContentResolver().insert(GPSContract.CONTENT_URI_COORDENADAS,values);
 			
 //		_handler.post(new Runnable() {
 //			@Override

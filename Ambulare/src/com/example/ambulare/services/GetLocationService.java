@@ -38,7 +38,7 @@ public class GetLocationService extends Service implements LocationListener {
 		_provider = _locationManager.getBestProvider(criteria, true);
 		_locationManager.requestLocationUpdates(_provider, 400, 1, this);
 		
-		Toast.makeText(this, "GetLocationService started", Toast.LENGTH_SHORT).show();
+//		Toast.makeText(this, "GetLocationService started" + _rota, Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override
@@ -47,9 +47,15 @@ public class GetLocationService extends Service implements LocationListener {
 //		receber o nome da rota via extra do intent 
 		
 		_rota = intent.getStringExtra(NOME_ROTA);
+		
+//		Criar e enviar o intent para gravar o nome da rota na BD
+		Intent intent1 = new Intent(this, AddRotaService.class);
+		intent1.putExtra(NOME_ROTA, _rota);
+		startService(intent1);
+		
+		Toast.makeText(this, "GetLocationService started " + _rota, Toast.LENGTH_SHORT).show();
 				
 		return super.onStartCommand(intent, flags, startId);
-	
 	}
 	
 	@Override
@@ -64,12 +70,12 @@ public class GetLocationService extends Service implements LocationListener {
 		
 //		este bloco vai arrancar o serviço que trata com a BD e envia os valores a guardar
 		
-		Intent intent = new Intent(this, AddLocationService.class);
-		intent.putExtra(LAT, lat);
-		intent.putExtra(LNG, lng);
-		intent.putExtra(ALT, altitude);
-		intent.putExtra(NOME_ROTA, _rota);
-		startService(intent);
+//		Intent intent = new Intent(this, AddLocationService.class);
+//		intent.putExtra(LAT, lat);
+//		intent.putExtra(LNG, lng);
+//		intent.putExtra(ALT, altitude);
+//		intent.putExtra(NOME_ROTA, _rota);
+//		startService(intent);
 
 	}
 

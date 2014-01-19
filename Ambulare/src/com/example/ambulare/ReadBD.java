@@ -42,7 +42,7 @@ public class ReadBD extends ListActivity
 		protected Cursor doInBackground(Void... params) 
 		{
 			
-			Cursor cursor = getContentResolver().query(GPSContract.CONTENT_URI, null, null, null, null);
+			Cursor cursor = getContentResolver().query(GPSContract.CONTENT_URI_ROTAS, null, null, null, null);
 			startManagingCursor(cursor);
 			return cursor;
 		}
@@ -51,7 +51,7 @@ public class ReadBD extends ListActivity
 		protected void onPostExecute(Cursor newCursor) 
 		{
 			@SuppressWarnings("deprecation")
-			CursorAdapter adapter = new SimpleCursorAdapter(ReadBD.this, android.R.layout.simple_list_item_1, newCursor, new String[]{GPSContract.Rota}, new int[] {android.R.id.text1});
+			CursorAdapter adapter = new SimpleCursorAdapter(ReadBD.this, android.R.layout.simple_list_item_1, newCursor, new String[]{GPSContract.NOME_ROTA}, new int[] {android.R.id.text1});
 			ReadBD.this.setListAdapter(adapter);
 		}
 	}

@@ -29,13 +29,15 @@
         </activity>
         
         <activity android:name="com.example.ambulare.ReadBD"/>
+        
         <provider 	
-            android:name="com.example.ambulare.provider.GPSProvider"
-            			  
+            android:name="com.example.ambulare.provider.GPSProvider"			  
             android:authorities="com.example.ambulare.provider.gpsprovider"	/>
         
         <service android:name="com.example.ambulare.services.GetLocationService"/>
         <service android:name="com.example.ambulare.services.AddLocationService"/>
+        <service android:name="com.example.ambulare.services.AddRotaService"/>
+        
     </application>
 
 </manifest>

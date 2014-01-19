@@ -25,6 +25,8 @@ public class GPSProvider extends ContentProvider {
 	private static UriMatcher URIMATCHER = new UriMatcher(UriMatcher.NO_MATCH);
 	private static final int ROTA_ID = 1;
 	private static final int ROTA_ALL = 2;
+	private static final int COORDENADAS_ID = 3;
+	private static final int COORDENADAS_ALL = 4;
 	
 	private static final String MIME_ALL = "vnd.android.cursor.dir/vnd.com.example.ambulare.provider." + GPSContract.TABLE_ROTAS;
 	private static final String MIME_ONE = "vnd.android.cursor.item/vnd.com.example.ambulare.provider." + GPSContract.TABLE_ROTAS;
@@ -33,8 +35,8 @@ public class GPSProvider extends ContentProvider {
 		
 		URIMATCHER.addURI(AUTHORITY, GPSContract.TABLE_ROTAS+"/#", ROTA_ID);
 		URIMATCHER.addURI(AUTHORITY, GPSContract.TABLE_ROTAS, ROTA_ALL);
-		URIMATCHER.addURI(AUTHORITY, GPSContract.TABLE_COORDENADAS+"/#", ROTA_ID);
-		URIMATCHER.addURI(AUTHORITY, GPSContract.TABLE_COORDENADAS, ROTA_ALL);
+		URIMATCHER.addURI(AUTHORITY, GPSContract.TABLE_COORDENADAS+"/#", COORDENADAS_ID);
+		URIMATCHER.addURI(AUTHORITY, GPSContract.TABLE_COORDENADAS, COORDENADAS_ALL);
 	}
 	
 	@Override
@@ -56,16 +58,36 @@ public class GPSProvider extends ContentProvider {
 		
 		int uri_type = URIMATCHER.match(uri);
 		
-		try
+		Log.d("uri_type", " uri type = " + uri_type);
+		
+		if (uri_type == 1 || uri_type == 2)
 		{
-			long row = db.insert(GPSContract.TABLE_ROTAS, null, values);
-			return (row == -1)? null:ContentUris.withAppendedId(uri, row);
+			try
+			{
+				long row = db.insert(GPSContract.TABLE_ROTAS, null, values);
+				return (row == -1)? null:ContentUris.withAppendedId(uri, row);
+			}
+			finally
+			{
+				db.close();
+				
+			}
 		}
-		finally
+		else
 		{
-			db.close();
-			
+			try
+			{
+				long row = db.insert(GPSContract.TABLE_COORDENADAS, null, values);
+				return (row == -1)? null:ContentUris.withAppendedId(uri, row);
+			}
+			finally
+			{
+				db.close();
+				
+			}
 		}
+		
+		
 	}
 
 	@Override
@@ -103,19 +125,20 @@ public class GPSProvider extends ContentProvider {
 
 		public void onCreate(SQLiteDatabase db) 
 		{
-//			String columns = GPSContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-//							 GPSContract.Rota_ID + " INTEGER NOT NULL, "+
-//							 GPSContract.Alt + " TEXT NOT NULL, "+
-//							 GPSContract.Lat + " TEXT NOT NULL, "+
-//							 GPSContract.Lng + " TEXT NOT NULL";
-//			
-//			String sql = "CREATE TABLE IF NOT EXISTS " + GPSContract.TABLE_COORDENADAS + " (" + columns + ")";
-//			db.execSQL(sql);
+			String columns = GPSContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+							 GPSContract.ROTA_ID + " LONG NOT NULL, "+
+							 GPSContract.ALT + " TEXT NOT NULL, "+
+							 GPSContract.LAT + " TEXT NOT NULL, "+
+							 GPSContract.LNG + " TEXT NOT NULL";
 			
-			String columns = 	GPSContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+			String sql = "CREATE TABLE IF NOT EXISTS " + GPSContract.TABLE_COORDENADAS + " (" + columns + ")";
+			Log.d("tabela", sql);
+			db.execSQL(sql);
+			
+			columns = 	GPSContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
 								GPSContract.NOME_ROTA + " TEXT NOT NULL";
 			
-			String sql = "CREATE TABLE IF NOT EXISTS " + GPSContract.TABLE_ROTAS + " (" + columns + ")";
+			sql = "CREATE TABLE IF NOT EXISTS " + GPSContract.TABLE_ROTAS + " (" + columns + ")";
 			
 			Log.d("tabela", sql);
 			db.execSQL(sql);

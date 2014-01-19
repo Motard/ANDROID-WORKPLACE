@@ -39,13 +39,12 @@ public class AddLocationService extends IntentService {
 		String lat = bundle.get(GetLocationService.LAT).toString();
 		String lng = bundle.get(GetLocationService.LNG).toString();
 		String alt = bundle.get(GetLocationService.ALT).toString();
-		String rota = bundle.get(GetLocationService.NOME_ROTA).toString();
-		
+		long rota_id = bundle.getLong(GetLocationService.ID_ROTA);
 		
 //		Insert in the BD
 		
 		ContentValues values = new ContentValues();
-		values.put(GPSContract.ROTA_ID, rota);
+		values.put(GPSContract.ROTA_ID, rota_id);
 		values.put(GPSContract.LAT, lat);
 		values.put(GPSContract.LNG, lng);
 		values.put(GPSContract.ALT, alt);
@@ -65,6 +64,6 @@ public class AddLocationService extends IntentService {
 		Log.d("ROTAS", "SERVICE ADD LOCATION" +" * Latitude " + lat + 
 											   " * Longitude " + lng + 
 											   " * Altitude " + alt + 
-											   " * Rota " + rota);
+											   " * Rota " + rota_id);
 	}
 }

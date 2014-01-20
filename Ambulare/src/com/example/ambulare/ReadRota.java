@@ -4,16 +4,18 @@ import com.example.ambulare.provider.GPSContract;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-public class ReadBD extends ListActivity 
+public class ReadRota extends ListActivity 
 {
 
 	
@@ -31,6 +33,12 @@ public class ReadBD extends ListActivity
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
+		
+		Intent intent = new Intent(this, ReadCoordenadas.class);
+		intent.putExtra(ReadCoordenadas.ROTA_ID, id);
+		startActivity(intent);
+		
+			
 	}
 	
 	
@@ -51,8 +59,8 @@ public class ReadBD extends ListActivity
 		protected void onPostExecute(Cursor newCursor) 
 		{
 			@SuppressWarnings("deprecation")
-			CursorAdapter adapter = new SimpleCursorAdapter(ReadBD.this, android.R.layout.simple_list_item_1, newCursor, new String[]{GPSContract.NOME_ROTA}, new int[] {android.R.id.text1});
-			ReadBD.this.setListAdapter(adapter);
+			CursorAdapter adapter = new SimpleCursorAdapter(ReadRota.this, android.R.layout.simple_list_item_1, newCursor, new String[]{GPSContract.NOME_ROTA}, new int[] {android.R.id.text1});
+			ReadRota.this.setListAdapter(adapter);
 		}
 	}
 }

@@ -99,9 +99,20 @@ public class GPSProvider extends ContentProvider {
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
+		
 		SQLiteDatabase db = helper.getReadableDatabase();
 		
-		return db.query(GPSContract.TABLE_ROTAS, projection, selection, selectionArgs, GPSContract.NOME_ROTA, null,  GPSContract.NOME_ROTA);		
+		int uri_type = URIMATCHER.match(uri);
+		
+		if (uri_type == 1 || uri_type == 2)
+		{
+		
+			return db.query(GPSContract.TABLE_ROTAS, projection, selection, selectionArgs, GPSContract.NOME_ROTA, null,  GPSContract.NOME_ROTA);	
+		}
+		else
+		{
+			return db.query(GPSContract.TABLE_COORDENADAS, projection, selection, selectionArgs, null, null, sortOrder);
+		}
 		
 	}
 

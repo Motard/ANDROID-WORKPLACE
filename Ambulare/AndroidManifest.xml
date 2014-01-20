@@ -28,7 +28,8 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="com.example.ambulare.ReadBD"/>
+        <activity android:name="com.example.ambulare.ReadRota"/>
+        <activity android:name="com.example.ambulare.ReadCoordenadas"/>
         
         <provider 	
             android:name="com.example.ambulare.provider.GPSProvider"			  

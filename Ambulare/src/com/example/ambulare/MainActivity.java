@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				
-				Intent lerBD = new Intent(MainActivity.this, ReadBD.class);
+				Intent lerBD = new Intent(MainActivity.this, ReadRota.class);
 				startActivity(lerBD);
 				
 			}

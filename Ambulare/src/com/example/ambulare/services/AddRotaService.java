@@ -13,7 +13,7 @@ import android.util.Log;
 
 public class AddRotaService extends IntentService {
 
-	long rota_id;
+	
 	
 	public AddRotaService() {
 		super("rotas");
@@ -36,18 +36,18 @@ public class AddRotaService extends IntentService {
 		
 //		retirar o ID do insert que foi feito
 		
-		rota_id = ContentUris.parseId(myNewUri);
+		long rota_id = ContentUris.parseId(myNewUri);
 		
 //		afetar a variavel de classe da AmbulareApplication 
 		((AmbulareApplication) getApplication()).set_rota_id(rota_id);
 		
-		Log.d("ARS", "adicionar nova rota " + rota + " URI - " + rota_id);
+		Log.d("ARS", "adicionar nova rota = " + rota + " ID = " + rota_id);
 
 	}
 
-	public long getRota_id() {
-		return rota_id;
-	}
+//	public long getRota_id() {
+//		return rota_id;
+//	}
 	
 	
 

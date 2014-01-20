@@ -63,6 +63,8 @@ public class ReadCoordenadas extends ListActivity
 
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
+			
+			
 			((TextView)view.findViewById(R.id.tv_altitude)).setText(cursor.getString(cursor.getColumnIndex(GPSContract.ALT)));
 			((TextView)view.findViewById(R.id.tv_latitude)).setText(cursor.getString(cursor.getColumnIndex(GPSContract.LAT)));
 			((TextView)view.findViewById(R.id.tv_longitude)).setText(cursor.getString(cursor.getColumnIndex(GPSContract.LNG)));

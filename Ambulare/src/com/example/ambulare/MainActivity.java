@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	
-	
+//	https://github.com/EcoviasPortugal/Android
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 

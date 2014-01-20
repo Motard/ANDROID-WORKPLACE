@@ -38,7 +38,7 @@ public class ReadRota extends ListActivity
 		intent.putExtra(ReadCoordenadas.ROTA_ID, id);
 		startActivity(intent);
 		
-			
+//		O id obtido é o ID da linha, que por acaso coincide com o ID da base dados. A maneira é usar um campo hidden com o ID da base dados e enviar esse valor	
 	}
 	
 	

@@ -35,6 +35,7 @@
         
         <activity android:name="com.example.ambulare.ReadRota"/>
         <activity android:name="com.example.ambulare.ReadCoordenadas"/>
+        <activity android:name="com.example.ambulare.MapRota"/>
         
         <provider 	
             android:name="com.example.ambulare.provider.GPSProvider"			  

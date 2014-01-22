@@ -221,7 +221,7 @@ containing a value of this type.
         public static final int ic_plusone_tall_off_client=0x7f02001c;
     }
     public static final class id {
-        public static final int action_settings=0x7f05001e;
+        public static final int action_settings=0x7f05001f;
         public static final int activity_get_location=0x7f050005;
         public static final int activity_get_location_TV1=0x7f050009;
         public static final int activity_get_location_TV2=0x7f05000a;
@@ -236,6 +236,7 @@ containing a value of this type.
         public static final int layout_main=0x7f050018;
         public static final int main_bt_ver_BD=0x7f05001a;
         public static final int main_bt_write_location=0x7f050019;
+        public static final int my_map=0x7f05001b;
         public static final int nome_rota=0x7f050007;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
@@ -249,9 +250,9 @@ containing a value of this type.
         public static final int tv_activity_get_location_direcao_value=0x7f050014;
         public static final int tv_activity_get_location_velocidade=0x7f050016;
         public static final int tv_activity_get_location_velocidade_value=0x7f050017;
-        public static final int tv_altitude=0x7f05001d;
-        public static final int tv_latitude=0x7f05001b;
-        public static final int tv_longitude=0x7f05001c;
+        public static final int tv_altitude=0x7f05001e;
+        public static final int tv_latitude=0x7f05001c;
+        public static final int tv_longitude=0x7f05001d;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f070000;
@@ -259,8 +260,9 @@ containing a value of this type.
     public static final class layout {
         public static final int activity_get_location=0x7f030000;
         public static final int activity_main=0x7f030001;
-        public static final int read_bd_layout=0x7f030002;
-        public static final int read_coordenadas_layout=0x7f030003;
+        public static final int activity_map_rota=0x7f030002;
+        public static final int read_bd_layout=0x7f030003;
+        public static final int read_coordenadas_layout=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;

@@ -34,8 +34,10 @@ public class ReadRota extends ListActivity
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
 		
-		Intent intent = new Intent(this, ReadCoordenadas.class);
-		intent.putExtra(ReadCoordenadas.ROTA_ID, id);
+//		Intent intent = new Intent(this, ReadCoordenadas.class);
+//		intent.putExtra(ReadCoordenadas.ROTA_ID, id);
+		
+		Intent intent = new Intent(this, MapRota.class);
 		startActivity(intent);
 		
 //		O id obtido é o ID da linha, que por acaso coincide com o ID da base dados. A maneira é usar um campo hidden com o ID da base dados e enviar esse valor	

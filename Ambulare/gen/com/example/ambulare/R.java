@@ -236,7 +236,7 @@ containing a value of this type.
         public static final int layout_main=0x7f050018;
         public static final int main_bt_ver_BD=0x7f05001a;
         public static final int main_bt_write_location=0x7f050019;
-        public static final int my_map=0x7f05001b;
+        public static final int map=0x7f05001b;
         public static final int nome_rota=0x7f050007;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
